@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
@@ -12,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Category
 {
     /**
+     * @var int
+     * 
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -19,15 +22,16 @@ class Category
     private $id;
 
     /**
+     * @var string
+     * 
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @var string
-     *
-     * @Gedmo\Slug(fields={"name"})
-     *
+     * 
      * @ORM\Column(type="string", length=128, unique=true)
      */
     private $slug;
